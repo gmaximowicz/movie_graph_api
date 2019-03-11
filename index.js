@@ -1,33 +1,14 @@
 'use strict'
 
 const express = require('express')
-const { ApolloServer, gql } = require('apollo-server-express')
-const graphqlHTTP = require('express-graphql')
-const casual = require('casual')
+const { ApolloServer } = require('apollo-server-express')
 
 //first define schemas
-const typeDefs = require('./schema')
-
-//second define resolvers
-const resolvers = require('./resolver')
-
-//mocks
-const mocks = {
-  Character: () => ({
-    id: casual.uuid,
-    name: casual.full_name,
-    aliases: casual.name
-  }),
-  Movie: () => ({
-    id: casual.uuid,
-    title: casual.title,
-    releaseYearRoman: casual.century
-  })
-}
+const schema = require('./schemas')
 
 //initialize the server
 const app = express()
-const server = new ApolloServer({ typeDefs, resolvers, mocks})
+const server = new ApolloServer({ schema })
 server.applyMiddleware({app})
 
 //consfigure routes

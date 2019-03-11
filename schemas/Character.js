@@ -1,4 +1,13 @@
-'use strict'
+'use stritc'
+
+const typeDef = `
+  type Character {
+    id : ID!
+    name : String!
+    aliases : String
+    films : [Movie]
+  }
+`
 
 const resolvers = {
   Query: {
@@ -27,24 +36,10 @@ const resolvers = {
           ]
         }
       ]
-    },
-    movies: () => {
-      return [
-        {
-          id: 1,
-          title: 'Back To The Future I',
-          releaseYear: 1985,
-          releaseYearRoman: 'MCMVXXXV',
-          casting: [
-            {
-              name: 'marty mcfly',
-              aliases: 'mcfly'
-            }
-          ]
-        }
-      ]
     }
   }
 }
-
-module.exports = resolvers
+module.exports = {
+  typeDef,
+  resolvers
+}
