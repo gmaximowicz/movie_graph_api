@@ -11,32 +11,7 @@ const typeDef = `
 
 const resolvers = {
   Query: {
-    characters: () => {
-      return [
-        {
-          id: 1,
-          name: 'marty mcfly',
-          aliases: 'mcfly',
-          films : [
-            {
-              title: 'Back To The Future I',
-              releaseYearRoman: 'MCMVXXXV'
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: 'dr. emmett brown',
-          aliases: 'doc',
-          films : [
-            {
-              title: 'Back To The Future I',
-              releaseYearRoman: 'MCMVXXXV'
-            }
-          ]
-        }
-      ]
-    }
+    characters: (_, __, { dataSources }) => dataSources.personAPI.getAllPersons()
   }
 }
 module.exports = {

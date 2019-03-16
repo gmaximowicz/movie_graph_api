@@ -18,10 +18,7 @@ const Query = `
   }
 `
 
-const resolvers = {
-  Query: {
-    //for generic resolvers
-  }
+module.exports = {
+  typeDefs: [Query, Character, Movie],
+  resolvers: merge(characterResolvers, moviesResolvers) 
 }
-
-module.exports = makeExecutableSchema({ typeDefs: [Query, Character, Movie], resolvers: merge(resolvers, characterResolvers, moviesResolvers) })

@@ -4,11 +4,22 @@ const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 
 //first define schemas
-const schema = require('./schemas')
+const { typeDefs, resolvers } = require('./schemas')
+
+//require de dataSources
+const movieAPI = require('./dataSources/movies')
+const personAPI = require('./dataSources/persons')
 
 //initialize the server
 const app = express()
-const server = new ApolloServer({ schema })
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => ({
+    movieAPI : new movieAPI(),
+    personAPI : new personAPI()
+  })
+})
 server.applyMiddleware({app})
 
 //consfigure routes

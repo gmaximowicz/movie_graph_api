@@ -12,22 +12,7 @@ const typeDef = `
 
 const resolvers = {
   Query: {
-    movies: () => {
-      return [
-        {
-          id: 1,
-          title: 'Back To The Future I',
-          releaseYear: 1985,
-          releaseYearRoman: 'MCMVXXXV',
-          characters: [
-            {
-              name: 'marty mcfly',
-              aliases: 'mcfly'
-            }
-          ]
-        }
-      ]
-    }
+    movies: async (_, __, { dataSources }) => dataSources.movieAPI.getAllMovies()
   }
 }
 
