@@ -5,13 +5,32 @@ const typeDef = `
     id : ID!
     name : String!
     aliases : String
-    films : [Movie]
+    moviesAsActor : [Movie]!
+    moviesAsDirector : [Movie]!
+    moviesAsProducer : [Movie]!
   }
 `
 
 const resolvers = {
   Query: {
-    characters: (_, __, { dataSources }) => dataSources.personAPI.getAllPersons()
+    characters: async (_, __, { dataSources }) => {
+      const persons = await dataSources.personAPI.getAllPersons()
+      return persons
+    }
+  },
+  Character: {
+    moviesAsActor: async (parent , __, { dataSources }) => {
+      const movies = parent.moviesAsActor
+      return movies && movies.map(dataSources.movieAPI.movieReducer) || []
+    },
+    moviesAsDirector: async (parent , __, { dataSources }) => {
+      const movies = parent.moviesAsDirector
+      return movies && movies.map(dataSources.movieAPI.movieReducer) || []
+    },
+    moviesAsProducer: async (parent , __, { dataSources }) => {
+      const movies = parent.moviesAsProducer
+      return movies && movies.map(dataSources.movieAPI.movieReducer) || []
+    }
   }
 }
 module.exports = {

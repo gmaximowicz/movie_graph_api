@@ -5,12 +5,17 @@ const { RESTDataSource } =  require('apollo-datasource-rest')
 class movieAPI extends RESTDataSource {
   constructor(){
     super()
-    this.baseURL = 'https://gmaximowicz-movie-site-api.glitch.me/api/'
+    this.baseURL = 'http://localhost:3000/api/'
   }
 
   async getAllMovies(){
     const response = await this.get('movies')
     return Array.isArray(response) ? response.map( this.movieReducer ) : []
+  }
+
+  async getMovieById(id){
+    const response = await this.get(`movies/${id}`)
+    return response ? this.movieReducer : null
   }
 
   movieReducer(movie){
