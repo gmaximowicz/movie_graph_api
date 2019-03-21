@@ -20,16 +20,16 @@ const resolvers = {
   },
   Character: {
     moviesAsActor: async (parent , __, { dataSources }) => {
-      const movies = parent.moviesAsActor
-      return movies && movies.map(dataSources.movieAPI.movieReducer) || []
+      const person = await dataSources.personAPI.getPersonById(parent.id)
+      return person && person.moviesAsActor && person.moviesAsActor.map(dataSources.movieAPI.movieReducer) || []
     },
     moviesAsDirector: async (parent , __, { dataSources }) => {
-      const movies = parent.moviesAsDirector
-      return movies && movies.map(dataSources.movieAPI.movieReducer) || []
+      const person = await dataSources.personAPI.getPersonById(parent.id)
+      return person && person.moviesAsDirector && person.moviesAsDirector.map(dataSources.movieAPI.movieReducer) || []
     },
     moviesAsProducer: async (parent , __, { dataSources }) => {
-      const movies = parent.moviesAsProducer
-      return movies && movies.map(dataSources.movieAPI.movieReducer) || []
+      const person = await dataSources.personAPI.getPersonById(parent.id)
+      return person && person.moviesAsProducer && person.moviesAsProducer.map(dataSources.movieAPI.movieReducer) || []
     }
   }
 }

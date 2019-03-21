@@ -15,7 +15,7 @@ class personAPI extends RESTDataSource {
 
   async getPersonById(id){
     const response = await this.get(`persons/${id}`)
-    return response ? response.map( this.personReducer ) : []
+    return response ? this.personReducer(response) : null
   }
 
   personReducer(person){

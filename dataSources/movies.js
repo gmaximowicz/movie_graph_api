@@ -10,12 +10,12 @@ class movieAPI extends RESTDataSource {
 
   async getAllMovies(){
     const response = await this.get('movies')
-    return Array.isArray(response) ? response.map( this.movieReducer ) : []
+    return Array.isArray(response) ? response.map(this.movieReducer) : []
   }
 
   async getMovieById(id){
     const response = await this.get(`movies/${id}`)
-    return response ? this.movieReducer : null
+    return response ? this.movieReducer(response) : null
   }
 
   movieReducer(movie){
@@ -23,7 +23,10 @@ class movieAPI extends RESTDataSource {
       id : movie.id,
       title : movie.title,
       releaseYear : movie.releaseYear,
-      releaseYearRoman : movie.releaseYearRoman
+      releaseYearRoman : movie.releaseYearRoman,
+      casting : movie.casting,
+      directors : movie.directors,
+      producers : movie.producers
     }
   }
 }
