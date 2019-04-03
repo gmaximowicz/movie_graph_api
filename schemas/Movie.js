@@ -14,7 +14,8 @@ const typeDef = `
 
 const resolvers = {
   Query: {
-    movies: async (_, __, { dataSources }) => dataSources.movieAPI.getAllMovies()
+    movie: async (_, params, { dataSources }) => await dataSources.movieAPI.getMovieById(params.id),
+    movies: async (_, __, { dataSources }) => await dataSources.movieAPI.getAllMovies()
   },
   Movie: {
     casting: async (parent , __, { dataSources }) => {

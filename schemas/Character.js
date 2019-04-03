@@ -13,6 +13,10 @@ const typeDef = `
 
 const resolvers = {
   Query: {
+    character: async (_, params, { dataSources }) => {
+      const character = await dataSources.personAPI.getPersonById(params.id)
+      return character
+    },
     characters: async (_, __, { dataSources }) => {
       const persons = await dataSources.personAPI.getAllPersons()
       return persons

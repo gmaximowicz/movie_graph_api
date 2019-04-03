@@ -13,6 +13,8 @@ const {
 
 const Query = `
   type Query{
+    character(id: ID!): Character
+    movie(id: ID!): Movie
     characters: [Character]
     movies: [Movie]
   }
@@ -20,5 +22,5 @@ const Query = `
 
 module.exports = {
   typeDefs: [Query, Character, Movie],
-  resolvers: merge(characterResolvers, moviesResolvers) 
+  resolvers: merge(characterResolvers, moviesResolvers)
 }

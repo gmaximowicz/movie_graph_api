@@ -24,7 +24,7 @@ server.applyMiddleware({app})
 
 //consfigure routes
 app.get('/', (req,res) => {
-  res.send('elou')
+  res.send('elou, try again in /graphql')
 })
 
 app.listen({ port: 4000 }, () => {

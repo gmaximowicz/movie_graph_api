@@ -5,7 +5,7 @@ const { RESTDataSource } =  require('apollo-datasource-rest')
 class movieAPI extends RESTDataSource {
   constructor(){
     super()
-    this.baseURL = 'http://localhost:3000/api/'
+    this.baseURL = process.env.API_URL || 'http://localhost:3000/api/'
   }
 
   async getAllMovies(){
